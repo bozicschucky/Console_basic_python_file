@@ -6,22 +6,29 @@ two files'''
 import requests
 import csv
 import json
-
 response = requests.get('https://www.metaweather.com/api/location/44418/2013/4/27/')
 json_data_received=response.json()
 # print(json_data_received)
 #print(json_data_received)
-csv_str = "Maximum_temperature\t, Visibility\t,the_temp\t,applicable_date\t \n"
-for x in json_data_received:
-    csv_str += "{},    {},   {},    {}".format(x['max_temp'], x['visibility'],x['the_temp'],x['applicable_date'])
-    csv_str += "\n"
-    print(csv_str)
-    exit()
 
-with open('output.txt', 'w') as text_file:
-    text_file.write(str(json_data_received))
+def return_json_data(json_data_received):
+    csv_str = "Maximum_temperature\t, Visibility\t,the_temp\t,applicable_date\t \n"
+    for x in json_data_received:
+        csv_str += "{},    {},   {},    {}".format(x['max_temp'], x['visibility'],x['the_temp'],x['applicable_date'])
+        csv_str += "\n"
+        print(csv_str)
+        exit()
 
-output=r'output.txt'
-csv_file=r'mycsv.csv'
-in_txt = csv.reader(open(output, "r"), delimiter = '\t')
-out_csv = csv.writer(open(csv_file, 'w'))
+    with open('output.txt', 'w') as text_file:
+        text_file.write(str(json_data_received))
+
+
+
+
+
+    output=r'output.txt'
+    csv_file=r'mycsv.csv'
+    in_txt = csv.reader(open(output, "r"), delimiter = '\t')
+    out_csv = csv.writer(open(csv_file, 'w'))
+
+return_json_data(json_data_received)
